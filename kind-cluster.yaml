@@ -1,0 +1,22 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+  kubeadmConfigPatches:
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "ingress-ready=true"
+  extraPortMappings:
+  - containerPort: 80
+    hostPort: 80
+    protocol: TCP
+  - containerPort: 443
+    hostPort: 443
+    protocol: TCP
+
+# Explanations:
+# role: control-plane is the master node
+# node-labels: “ingress-ready=true” allows ingress controller to run on a specific node matching the label selector.
+# extraPortMappings allows the localhost (your laptop) to make requests to the ingress controller over ports 80/443
