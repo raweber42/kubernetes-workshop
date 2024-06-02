@@ -1,5 +1,5 @@
 # kubernetes-workshop
-This repository is meant to be the starting point for 42 students who are attending the kubernetes workshop in 42 wolfsburg.
+This repository is meant to be the starting point for students who are attending the kubernetes workshop at 42 wolfsburg.
 
 ## Prereqisites:
 - [docker](https://docs.docker.com/get-docker/) installed
@@ -40,6 +40,9 @@ This repository is meant to be the starting point for 42 students who are attend
 - run `kubectl get ingress` to see the newly created ingress and that it exposes port 80 of the cluster to the outside world!
 - now your webserver is successfully exposed to the outside world of your cluster!
 - run `curl localhost:80` to see that you can access the server from your laptop. try the same address from your browser!
+
+## Scale up your NGINX instance
+- with kubernetes we can easily make changes to our cluster and e.g. scale our replicas (amount of instances of a server in our case) up and down. This can be done via `kubectl` (`kubectl scale deployment <deployment-name> --replicas=3`), where the deployment name is `nginx` in our case. A more git-ops like approach and best practice is to put this configuration into our yaml files and check them into git. Change the `replicas` field in our `webserver.yaml` file to `2` and run `kubectl apply -f webserver.yaml`. This way you make use of the declarative approach of kubernetes!
 
 
 ## Cleanup
